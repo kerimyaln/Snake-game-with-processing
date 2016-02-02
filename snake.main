@@ -1,0 +1,127 @@
+
+int f=0,yon=0,uzunluk=10,yemX,yemY;
+boolean gameOverdrm=false;
+koordinat [] nokta=new koordinat [300];
+void setup(){
+  size(900,600);
+
+ strokeWeight(1);
+ stroke(#ff1400);
+ fill(#ff1400);
+ textSize(20);
+
+for(int a=0;a<uzunluk;a++){
+nokta[a]=new koordinat(420-a*6,300);
+nokta[a].drawCircle();
+}
+yem();
+}
+void draw(){
+    background(#60a1ff);
+    fill(#a07e1a);
+   text("SCORE: "+(uzunluk-10), 10, 595);
+ fill(#ff1400);
+
+if(nokta[uzunluk].X==nokta[0].X&&nokta[uzunluk].Y==nokta[0].Y){
+ uzunluk++;
+ yem();
+ }
+    switch(yon){
+  case 0:sag(); break;
+  case 1: sol();break;
+  case 2: yukari(); break;
+  case 3: asagi(); break;
+ }
+ drawcrcl();
+delay(28);
+}// draw sonu
+void keyPressed(){if(!gameOverdrm){
+if(keyCode==LEFT&&yon!=0)
+yon=1;
+else if(keyCode==RIGHT&&yon!=1)
+yon=0;
+else if(keyCode==UP&&yon!=3)
+yon=2;
+else if(keyCode==DOWN&&yon!=2)
+yon=3;
+
+}}
+void yediMi(){
+
+}
+
+void yem(){
+
+yemX=(int)random(894);
+yemY=(int)random(594);
+yemX=yemX-yemX%6;
+yemY=yemY-yemY%6;
+for(f=0;f<uzunluk;f++){
+if((nokta[f].X==yemX&&nokta[f].Y==yemY)||(yemX<7||yemY<7)){
+yemX=(int)random(894);
+yemY=(int)random(594);
+yemX=yemX-yemX%6;
+yemY=yemY-yemY%6;
+f=0;
+} }
+
+nokta[uzunluk]=new koordinat(yemX,yemY);
+
+  
+}
+boolean yandiMi(){
+  
+for(f=1;f<uzunluk;f++){
+  if((nokta[0].Y==nokta[f].Y&&nokta[0].X==nokta[f].X)||(nokta[0].X<5||nokta[0].Y<5||nokta[0].X>895||nokta[0].Y>595))
+  return true;
+}
+return false;
+}
+void sag(){
+geriKaydir();
+nokta[0].X+=6;
+}
+void sol(){
+geriKaydir();
+nokta[0].X-=6;
+}
+void yukari(){
+geriKaydir();
+nokta[f].Y-=6;
+
+}
+void asagi(){
+geriKaydir();
+nokta[f].Y+=6;
+
+}
+
+void geriKaydir(){
+for(f=uzunluk-1;f>0;f--){
+nokta [f].X=nokta[f-1].X;
+nokta [f].Y=nokta[f-1].Y;
+  } }
+void drawcrcl(){
+   gameOverdrm=yandiMi();
+  if(gameOverdrm){
+ gameOver();
+ }
+  else
+  
+for(f=0;f<=uzunluk;f++)
+nokta[f].drawCircle();
+}
+void gameOver(){
+  yon=0; 
+  gameOverdrm=false;
+  for(f=0;f<=uzunluk;f++){
+  nokta[f].X=0;
+  nokta[f].Y=0;}
+  
+for(int a=0;a<uzunluk;a++){
+nokta[a]=new koordinat(420-a*6,300);
+nokta[a].drawCircle();
+}
+  yem(); 
+ uzunluk=10;
+}
