@@ -1,0 +1,14 @@
+class koordinat{
+int X,Y;
+koordinat(){
+X=0;
+Y=0;
+}
+koordinat(int x,int y){
+X=x;
+Y=y;
+}
+void drawCircle(){
+ellipse(X,Y,10,10);
+}
+}
